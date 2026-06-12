@@ -1,0 +1,51 @@
+# Unity generated folders
+Library/
+Temp/
+Logs/
+Obj/
+Build/
+Builds/
+
+# Unity user-specific files
+UserSettings/
+.vs/
+.vscode/
+
+# IDE and OS files
+.idea/
+*.csproj
+*.sln
+*.slnx
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.opendb
+*.VC.db
+*.stackdump
+*.log
+
+# Unity cache and generated metadata
+*.apk
+*.aab
+*.unitypackage
+*.app
+*.exe
+*.dll
+*.so
+*.dylib
+*.aar
+*.lib
+*.meta~
+*.tmp
+*.bak
+
+# Gradle and package manager outputs
+.gradle/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+Desktop.ini

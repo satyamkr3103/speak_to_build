@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5328406134439528452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8614587660086005072}
+  - component: {fileID: 7972257189235836820}
+  m_Layer: 0
+  m_Name: BridgeRecipe
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8614587660086005072
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5328406134439528452}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 24.24513, y: 0, z: 2.1681}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7972257189235836820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5328406134439528452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5f2f4148d514fe4ebe9cae624f98998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BridgeRecipe
+  pieces:
+  - prefab: {fileID: 5403058391150481618, guid: 371b1b6745fb72f4797ea1d858b7bc60, type: 3}
+    localPosition: {x: -1.5, y: 0, z: 0}
+  - prefab: {fileID: 5403058391150481618, guid: 371b1b6745fb72f4797ea1d858b7bc60, type: 3}
+    localPosition: {x: 1.5, y: 0, z: 0}
+  - prefab: {fileID: 8096000694881005325, guid: 6162d0f4b75bec841b8db188d9ba59f6, type: 3}
+    localPosition: {x: -1, y: 1, z: 0}
+  - prefab: {fileID: 8096000694881005325, guid: 6162d0f4b75bec841b8db188d9ba59f6, type: 3}
+    localPosition: {x: 0, y: 1, z: 0}
+  - prefab: {fileID: 8096000694881005325, guid: 6162d0f4b75bec841b8db188d9ba59f6, type: 3}
+    localPosition: {x: 1, y: 1, z: 0}
