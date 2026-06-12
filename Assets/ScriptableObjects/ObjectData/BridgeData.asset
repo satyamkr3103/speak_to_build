@@ -17,7 +17,7 @@ MonoBehaviour:
   energyCost: 15
   lifeTime: 20
   icon: {fileID: 0}
-  blueprintPrefab: {fileID: 0}
+  blueprintPrefab: {fileID: 7391212371456587895, guid: bbeb1547407e9334ca29b458ab0998f5, type: 3}
   recipePrefab: {fileID: 5328406134439528452, guid: f544d949f027e2e43b02f588575a6a9c, type: 3}
   isVehicle: 0
   isCreature: 0

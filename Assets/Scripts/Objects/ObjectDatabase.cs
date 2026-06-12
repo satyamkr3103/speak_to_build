@@ -25,8 +25,6 @@ public class ObjectDatabase : MonoBehaviour
     {
         ObjectData data =
             GetObject("bridge");
-
-        Debug.Log(data.objectName);
     }
 
     public ObjectData GetObject(string name)
