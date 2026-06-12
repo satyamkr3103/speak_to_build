@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ccbf573eb2f3b73499478797fff51396, type: 3}
-  m_Name: BridgeData
+  m_Name: LadderData
   m_EditorClassIdentifier: Assembly-CSharp::ObjectData
-  objectName: Bridge
-  description: 
-  energyCost: 15
+  objectName: Ladder
+  description: Used to climb vertical structures.
+  energyCost: 10
   lifeTime: 20
   icon: {fileID: 0}
   blueprintPrefab: {fileID: 0}
-  recipePrefab: {fileID: 5328406134439528452, guid: f544d949f027e2e43b02f588575a6a9c, type: 3}
+  recipePrefab: {fileID: 3201890428008491689, guid: 56518a466dda0ed40a628f35a39d78d6, type: 3}
   isVehicle: 0
   isCreature: 0
   isHazard: 0

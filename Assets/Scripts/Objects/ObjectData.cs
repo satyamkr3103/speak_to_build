@@ -12,8 +12,8 @@ public class ObjectData : ScriptableObject
     public float lifeTime;
 
     public Sprite icon;
-
-    public GameObject constructionRecipe;
+    public GameObject blueprintPrefab;
+    public GameObject recipePrefab;
 
     public bool isVehicle;
 

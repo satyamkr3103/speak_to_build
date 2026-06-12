@@ -3,15 +3,19 @@ using UnityEngine;
 
 public class ConstructionBuilder : MonoBehaviour
 {
-    public IEnumerator BuildBridge(
+    public IEnumerator BuildObject(
         Vector3 position,
         Quaternion rotation,
-        BridgeRecipe recipe)
+        GenericRecipe recipe)
     {
         foreach (var piece in recipe.pieces)
         {
             Vector3 spawnPos =
                 position + rotation * piece.localPosition;
+
+            Debug.Log("Build Position: " + position);
+            Debug.Log("Piece Offset: " + piece.localPosition);
+            Debug.Log("Final Spawn: " + spawnPos);
 
             GameObject obj =
                 Instantiate(

@@ -3,11 +3,15 @@ using UnityEngine.InputSystem;
 
 public class BlueprintPreview : MonoBehaviour
 {
+    private PlacementValidator validator;
+    private Renderer rend;
     private Camera cam;
     private float rotationY = 0f;
     private void Start()
     {
         cam = Camera.main;
+        validator = GetComponent<PlacementValidator>();
+        rend = GetComponentInChildren<Renderer>();
         Debug.Log(cam);
     }
 
@@ -21,6 +25,20 @@ public class BlueprintPreview : MonoBehaviour
         if (Keyboard.current.eKey.wasPressedThisFrame)
         {
             rotationY += 90f;
+        }
+
+        if (validator != null)
+        {
+            bool valid = validator.IsValidPlacement();
+
+            if (valid)
+            {
+                rend.material.color = new Color(0f, 1f, 0f, 0.5f);
+            }
+            else
+            {
+                rend.material.color = new Color(1f, 0f, 0f, 0.5f);
+            }
         }
         if (cam == null)
         {

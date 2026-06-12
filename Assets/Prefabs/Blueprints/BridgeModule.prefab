@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 2948672676543055524}
   - component: {fileID: 5959917631474206882}
   - component: {fileID: -3435377266468927025}
-  m_Layer: 0
+  - component: {fileID: 1079831592659017359}
+  m_Layer: 6
   m_Name: BridgeModule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,3 +126,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad136b8c61ca93b4c98fc1789c42925f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlueprintPreview
+--- !u!114 &1079831592659017359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7391212371456587895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d4b7a456548ee4ea1054743a33e513, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlacementValidator
+  blockingLayers:
+    serializedVersion: 2
+    m_Bits: 128
