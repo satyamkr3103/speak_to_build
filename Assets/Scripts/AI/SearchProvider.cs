@@ -1,65 +1,35 @@
 using System.Threading.Tasks;
 using UnityEngine;
-
 public class SearchProvider : MonoBehaviour
 {
     public static SearchProvider Instance;
 
+    private IModelSearchProvider[]
+        providers;
+
     private void Awake()
     {
         Instance = this;
+
+        providers =
+            new IModelSearchProvider[]
+            {
+                new PolyPizzaProvider(),
+                new SketchfabProvider()
+            };
     }
 
     public async Task<ModelSearchResult>
         Search(string objectName)
     {
-        Debug.Log(
-            "Searching for: " +
-            objectName);
-
-        await Task.Delay(500);
-
-        return GetMockResult(
-            objectName);
-    }
-
-    ModelSearchResult GetMockResult(
-        string objectName)
-    {
-        objectName =
-            objectName.ToLower();
-
-        if(objectName == "dragon")
+        foreach(var provider in providers)
         {
-            return new ModelSearchResult
-            {
-                objectName = "dragon",
-                category = "creature",
-                downloadUrl =
-                    "https://example.com/dragon.glb"
-            };
-        }
+            ModelSearchResult result =
+                await provider.Search(
+                    objectName);
 
-        if(objectName == "lion")
-        {
-            return new ModelSearchResult
-            {
-                objectName = "lion",
-                category = "creature",
-                downloadUrl =
-                    "https://example.com/lion.glb"
-            };
-        }
-
-        if(objectName == "car")
-        {
-            return new ModelSearchResult
-            {
-                objectName = "car",
-                category = "vehicle",
-                downloadUrl =
-                    "https://example.com/car.glb"
-            };
+            if(result != null)
+                return result;
         }
 
         return null;

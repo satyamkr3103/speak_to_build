@@ -66,11 +66,18 @@ public class AISpawnManager : MonoBehaviour
 
         if (result != null)
         {
-            string path =
-                await DownloadManager.Instance
-                .DownloadModel(
-                    result.objectName,
-                    result.downloadUrl);
+            Debug.Log(
+        "Download URL Found");
+
+    string path =
+        await DownloadManager.Instance
+        .DownloadAndExtract(
+            result.objectName,
+            result.downloadUrl);
+
+    Debug.Log(
+        "Extracted Path: " +
+        path);
 
             if (path != null)
             {

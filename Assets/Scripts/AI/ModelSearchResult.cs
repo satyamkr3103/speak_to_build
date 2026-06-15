@@ -6,4 +6,8 @@ public class ModelSearchResult
     public string category;
 
     public string downloadUrl;
+
+    public string modelName;
+
+    public string uid;
 }
