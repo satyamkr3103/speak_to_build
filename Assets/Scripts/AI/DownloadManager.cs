@@ -127,13 +127,26 @@ public class DownloadManager : MonoBehaviour
     ".glb",
     System.StringComparison.OrdinalIgnoreCase))
         {
+            CacheManager.Instance
+                .SaveToCache(
+                    objectName,
+                    sourceFile);
+
             return sourceFile;
         }
 
         string glbPath =
-            await BlenderConverter.Instance
-                .ConvertToGLB(
-                    sourceFile);
+    await BlenderConverter.Instance
+        .ConvertToGLB(
+            sourceFile);
+
+        if (glbPath != null)
+        {
+            CacheManager.Instance
+                .SaveToCache(
+                    objectName,
+                    glbPath);
+        }
 
         return glbPath;
     }

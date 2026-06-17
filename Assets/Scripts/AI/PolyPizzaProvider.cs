@@ -4,7 +4,7 @@ using UnityEngine;
 public class PolyPizzaProvider :
     IModelSearchProvider
 {
-    public async Task<ModelSearchResult>
+    public async Task<SearchResultsBundle>
         Search(string objectName)
     {
         Debug.Log(
@@ -13,6 +13,6 @@ public class PolyPizzaProvider :
 
         await Task.Delay(100);
 
-        return null;
+        return new SearchResultsBundle();
     }
 }

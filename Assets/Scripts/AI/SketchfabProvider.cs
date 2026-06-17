@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -9,7 +10,7 @@ public class SketchfabProvider :
     private string apiToken =
     APIKeys.SketchfabToken;
 
-    public async Task<ModelSearchResult>
+    public async Task<SearchResultsBundle>
         Search(string objectName)
     {
         string url =
@@ -55,40 +56,153 @@ public class SketchfabProvider :
             return null;
         }
 
+        List<SearchCandidate>
+            candidates =
+                new List<SearchCandidate>();
+
         foreach (var model in response.results)
         {
-            if (model.isDownloadable)
+            if (!model.isDownloadable)
+                continue;
+
+            List<string> tagList =
+    new List<string>();
+
+            if (model.tags != null)
             {
-                Debug.Log(
-                    "Found Downloadable: " +
-                    model.name);
-
-                string downloadInfo =
-                    await GetDownloadUrl(
-                        model.uid);
-
-                System.IO.File.WriteAllText(
-    Application.dataPath +
-    "/downloadResponse.json",
-    downloadInfo);
-
-                Debug.Log(
-                    "Saved Download Response");
-                return new ModelSearchResult
+                foreach (var tag in model.tags)
                 {
-                    objectName = objectName,
-                    modelName = model.name,
+                    tagList.Add(tag.name);
+                }
+            }
+
+            candidates.Add(
+                new SearchCandidate
+                {
                     uid = model.uid,
-                    category = "Unknown",
-                    downloadUrl = downloadInfo
-                };
+                    name = model.name,
+                    likes = model.likeCount,
+                    views = model.viewCount,
+                    description = model.description,
+                    tags = tagList
+                });
+        }
+
+        if (candidates.Count == 0)
+        {
+            Debug.LogError(
+                "No downloadable Sketchfab model found");
+
+            return null;
+        }
+
+        List<SearchCandidate>
+    filtered =
+        new List<SearchCandidate>();
+
+        foreach (var candidate in candidates)
+        {
+            bool valid =
+                await GroqModelFilter.Instance
+                    .IsValidCandidate(
+                        objectName,
+                        candidate);
+
+            if (valid)
+            {
+                filtered.Add(
+                    candidate);
             }
         }
 
-        Debug.LogError(
-            "No downloadable Sketchfab model found");
+        if (filtered.Count == 0)
+        {
+            Debug.LogError(
+                "No Sketchfab candidates passed Groq filtering");
 
-        return null;
+            return null;
+        }
+
+        filtered.Sort(
+    (a, b) =>
+    {
+        int scoreA =
+            a.likes * 2 +
+            a.views / 1000 +
+            ModelSuccessCache
+                .Instance
+                .GetScore(a.uid) * 1000;
+
+        int scoreB =
+            b.likes * 2 +
+            b.views / 1000 +
+            ModelSuccessCache
+                .Instance
+                .GetScore(b.uid) * 1000;
+
+        return scoreB.CompareTo(scoreA);
+    });
+
+        if (filtered.Count > 8)
+        {
+            filtered =
+                filtered.GetRange(
+                    0,
+                    8);
+        }
+
+        Debug.Log("=== Candidates ===");
+
+        for (int i = 0; i < filtered.Count; i++)
+        {
+            Debug.Log(
+                $"{i}: {filtered[i].name}");
+        }
+
+        Debug.Log(
+            "=== FILTERED ===");
+
+        foreach (var item in filtered)
+        {
+            Debug.Log(
+                item.name);
+        }
+
+        SearchResultsBundle bundle =
+            new SearchResultsBundle();
+
+        for (int i = 0;
+            i < filtered.Count;
+            i++)
+        {
+            SearchCandidate candidate =
+                filtered[i];
+
+            string downloadUrl =
+                await GetDownloadUrl(
+                    candidate.uid);
+
+            if (downloadUrl == null)
+                continue;
+
+            bundle.results.Add(
+                new ModelSearchResult
+                {
+                    objectName =
+                        objectName,
+
+                    modelName =
+                        candidate.name,
+
+                    uid =
+                        candidate.uid,
+
+                    downloadUrl =
+                        downloadUrl
+                });
+        }
+
+        return bundle;
     }
 
     public async Task<string>

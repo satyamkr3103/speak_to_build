@@ -14,45 +14,49 @@ public class CacheManager : MonoBehaviour
         cacheFolder =
             Path.Combine(
                 Application.persistentDataPath,
-                "DownloadedObjects");
+                "ConvertedObjects");
 
-        if (!Directory.Exists(cacheFolder))
+        if (!Directory.Exists(
+            cacheFolder))
         {
-            Directory.CreateDirectory(cacheFolder);
+            Directory.CreateDirectory(
+                cacheFolder);
         }
-        
     }
 
-    public bool HasCachedObject(string objectName)
-{
-    string path =
-        Path.Combine(
+    public bool HasCachedObject(
+        string objectName)
+    {
+        string path =
+            GetCachedPath(
+                objectName);
+
+        return File.Exists(path);
+    }
+
+    public string GetCachedPath(
+        string objectName)
+    {
+        return Path.Combine(
             cacheFolder,
-            objectName + ".glb");
+            objectName.ToLower() + ".glb");
+    }
 
-    if(File.Exists(path))
-        return true;
+    public void SaveToCache(
+        string objectName,
+        string glbPath)
+    {
+        string targetPath =
+            GetCachedPath(
+                objectName);
 
-    string streamingPath =
-        Path.Combine(
-            Application.streamingAssetsPath,
-            objectName + ".glb");
+        File.Copy(
+            glbPath,
+            targetPath,
+            true);
 
-    return File.Exists(streamingPath);
-}
-
-    public string GetCachedPath(string objectName)
-{
-    string cachePath =
-        Path.Combine(
-            cacheFolder,
-            objectName + ".glb");
-
-    if(File.Exists(cachePath))
-        return cachePath;
-
-    return Path.Combine(
-        Application.streamingAssetsPath,
-        objectName + ".glb");
-}
+        Debug.Log(
+            "Saved To Cache: " +
+            targetPath);
+    }
 }

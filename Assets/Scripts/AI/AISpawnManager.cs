@@ -17,6 +17,42 @@ public class AISpawnManager : MonoBehaviour
     {
         objectName =
             objectName.ToLower().Trim();
+        ModelMemory memory =
+    ModelMemoryDatabase
+        .Instance
+        .GetBestMemory(
+            objectName);
+
+        if (memory != null &&
+           File.Exists(
+               memory.glbPath))
+        {
+            Debug.Log(
+                "Memory Hit: " +
+                memory.modelName);
+
+            GameObject obj =
+                await GLBLoader.Instance
+                    .LoadGLB(
+                        memory.glbPath);
+
+            if (obj != null)
+            {
+                obj.transform.position =
+                    position;
+
+                AutoSetupManager.Instance
+                    .SetupObject(
+                        obj,
+                        objectName);
+
+                PlacementManager.Instance
+    .BeginPlacement(
+        obj);
+
+                return obj;
+            }
+        }
         Debug.Log("Checking Registry...");
         // Local prefab
         if (AssetRegistry.Instance.HasPrefab(objectName))
@@ -31,7 +67,11 @@ public class AISpawnManager : MonoBehaviour
                     position,
                     Quaternion.identity);
 
-            return obj;
+            PlacementManager.Instance
+    .BeginPlacement(
+        obj);
+
+return obj;
         }
         Debug.Log("Checking Cache...");
         // Cached GLB
@@ -57,46 +97,81 @@ public class AISpawnManager : MonoBehaviour
                         objectName);
             }
 
-            return obj;
+            PlacementManager.Instance
+    .BeginPlacement(
+        obj);
+
+return obj;
         }
         Debug.Log("Checking SearchProvider...");
-        ModelSearchResult result =
-    await SearchProvider.Instance
-        .Search(objectName);
+        SearchResultsBundle bundle =
+            await SearchProvider.Instance
+                .Search(objectName);
 
-        if (result != null)
+        if (bundle != null &&
+            bundle.results.Count > 0)
         {
-            Debug.Log(
-        "Download URL Found");
-
-    string path =
-        await DownloadManager.Instance
-        .DownloadAndExtract(
-            result.objectName,
-            result.downloadUrl);
-
-    Debug.Log(
-        "Extracted Path: " +
-        path);
-
-            if (path != null)
+            foreach (
+                ModelSearchResult result
+                in bundle.results)
             {
-                GameObject obj =
-                    await GLBLoader.Instance
-                    .LoadGLB(path);
+                Debug.Log(
+                    "Trying: " +
+                    result.modelName);
 
-                if (obj != null)
+                string path =
+                    await DownloadManager.Instance
+                        .DownloadAndExtract(
+                            objectName,
+                            result.downloadUrl);
+
+                if (path == null)
                 {
-                    obj.transform.position =
-                        position;
+                    Debug.LogWarning(
+                        "Download Failed");
 
-                    AutoSetupManager.Instance
-                        .SetupObject(
-                            obj,
-                            objectName);
+                    continue;
                 }
 
-                return obj;
+                GameObject obj =
+                    await GLBLoader.Instance
+                        .LoadGLB(path);
+
+                if (obj == null)
+                {
+                    Debug.LogWarning(
+                        "Load Failed");
+
+                    continue;
+                }
+
+                obj.transform.position =
+                    position;
+
+                AutoSetupManager.Instance
+                    .SetupObject(
+                        obj,
+                        objectName);
+
+                Debug.Log(
+                    "SUCCESS: " +
+                    result.modelName);
+                ModelMemoryDatabase
+    .Instance
+    .RecordSuccess(
+        objectName,
+        result.uid,
+        result.modelName,
+        path);
+
+                ModelSuccessCache.Instance
+                    .RecordSuccess(result.uid);
+
+                PlacementManager.Instance
+    .BeginPlacement(
+        obj);
+
+return obj;
             }
         }
 

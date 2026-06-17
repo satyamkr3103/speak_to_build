@@ -19,19 +19,28 @@ public class SearchProvider : MonoBehaviour
             };
     }
 
-    public async Task<ModelSearchResult>
+    public async Task<SearchResultsBundle>
         Search(string objectName)
     {
-        foreach(var provider in providers)
+        SearchResultsBundle bundle =
+            new SearchResultsBundle();
+
+        foreach (var provider in providers)
         {
-            ModelSearchResult result =
+            SearchResultsBundle providerBundle =
                 await provider.Search(
                     objectName);
 
-            if(result != null)
-                return result;
+            if (providerBundle != null &&
+                providerBundle.results.Count > 0)
+            {
+                bundle.results.AddRange(
+                    providerBundle.results);
+            }
         }
 
-        return null;
+        return bundle.results.Count > 0
+            ? bundle
+            : null;
     }
 }

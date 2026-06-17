@@ -45,6 +45,12 @@ public class BlenderConverter : MonoBehaviour
         process.StartInfo.UseShellExecute =
             false;
 
+        process.StartInfo.RedirectStandardOutput =
+    true;
+
+        process.StartInfo.RedirectStandardError =
+            true;
+
         process.Start();
 
         await Task.Run(() =>
@@ -52,6 +58,21 @@ public class BlenderConverter : MonoBehaviour
             process.WaitForExit();
         });
 
+        string output =
+    process.StandardOutput.ReadToEnd();
+
+        string error =
+            process.StandardError.ReadToEnd();
+
+        Debug.Log(output);
+
+        if (!string.IsNullOrEmpty(error))
+        {
+            Debug.LogError(error);
+        }
+        Debug.Log(
+    "Blender Exit Code: " +
+    process.ExitCode);
         if (File.Exists(outputPath))
         {
             Debug.Log(

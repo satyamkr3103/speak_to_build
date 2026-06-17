@@ -15,4 +15,18 @@ public class SketchfabModel
     public string name;
 
     public bool isDownloadable;
+
+    public int likeCount;
+
+    public int viewCount;
+
+    public string description;
+
+    public List<Tag> tags;
+}
+
+[Serializable]
+public class Tag
+{
+    public string name;
 }

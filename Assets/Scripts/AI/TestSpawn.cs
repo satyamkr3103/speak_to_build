@@ -1,12 +1,32 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TestSpawn : MonoBehaviour
 {
-    async void Start()
+    private Keyboard keyboard;
+
+    private void Start()
     {
-        await AISpawnManager.Instance
-    .SpawnObject(
-        "spaceship",
-        Vector3.zero);
+        keyboard =
+            Keyboard.current;
+    }
+
+    private void Update()
+    {
+        if (keyboard == null)
+            return;
+
+        if (keyboard.rKey.wasPressedThisFrame)
+        {
+            VoiceRecorder.Instance
+                .StartRecording();
+        }
+
+        if (keyboard.tKey.wasPressedThisFrame)
+        {
+            _ =
+                VoiceBuildManager.Instance
+                    .ProcessVoice();
+        }
     }
 }

@@ -1432,7 +1432,7 @@ GameObject:
   - component: {fileID: 1403715416}
   - component: {fileID: 1403715415}
   - component: {fileID: 1403715414}
-  - component: {fileID: 1403715417}
+  - component: {fileID: 1403715413}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1455,6 +1455,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1735605541}
   m_LocalEulerAnglesHint: {x: 30, y: 45, z: 0}
+--- !u!114 &1403715413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403715411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf6bc4feb8fc29748bf488c3587435dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IsometricCamera
+  target: {fileID: 1785093208}
+  offset: {x: 0, y: 15, z: -15}
+  smoothSpeed: 5
 --- !u!114 &1403715414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1541,7 +1556,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 10
   m_Depth: 0
   m_CullingMask:
@@ -1558,22 +1573,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &1403715417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1403715411}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8446b570c2fbb75428f61d36f6898406, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ThirdPersonCamera
-  target: {fileID: 1785093208}
-  distance: 5
-  height: 2
-  sensitivity: 0.5
 --- !u!1 &1524170164
 GameObject:
   m_ObjectHideFlags: 0
@@ -1663,8 +1662,8 @@ GameObject:
   - component: {fileID: 1785093206}
   - component: {fileID: 1785093205}
   - component: {fileID: 1785093204}
+  - component: {fileID: 1785093203}
   - component: {fileID: 1785093209}
-  - component: {fileID: 1785093210}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -1672,6 +1671,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1785093203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785093202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: add6166a060f55d44ade2643116e27f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  moveSpeed: 5
+  sprintSpeed: 8
+  rotationSpeed: 10
+  jumpHeight: 2
+  gravity: -20
 --- !u!143 &1785093204
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1805,22 +1821,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VehicleInteraction
   interactionRange: 3
---- !u!114 &1785093210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1785093202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a2d44eec6bc1014fb53a61b56435237, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController3D
-  moveSpeed: 5
-  sprintSpeed: 9
-  gravity: -20
-  jumpHeight: 1.5
 --- !u!1 &2066826640
 GameObject:
   m_ObjectHideFlags: 0
