@@ -9,7 +9,6 @@ public class GridManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        Debug.Log("GridManager Initialized");
     }
 
     public Vector3 SnapToGrid(Vector3 position)

@@ -43,7 +43,7 @@ public class VehicleInteraction : MonoBehaviour
 
         vehicle.isControlled = true;
 
-        GetComponent<PlayerController>().enabled = false;
+        GetComponent<PlayerController3D>().enabled = false;
 
         Renderer renderer =
             GetComponentInChildren<Renderer>();
@@ -70,7 +70,7 @@ public class VehicleInteraction : MonoBehaviour
         if (renderer != null)
             renderer.enabled = true;
 
-        GetComponent<PlayerController>().enabled = true;
+        GetComponent<PlayerController3D>().enabled = true;
 
         Camera.main
             .GetComponent<IsometricCamera>()

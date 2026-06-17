@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8614587660086005072}
-  - component: {fileID: 7972257189235836820}
-  m_Layer: 0
+  - component: {fileID: 6334392449682997097}
+  m_Layer: 6
   m_Name: BridgeRecipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7972257189235836820
+--- !u!114 &6334392449682997097
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,9 +41,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5328406134439528452}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5f2f4148d514fe4ebe9cae624f98998, type: 3}
+  m_Script: {fileID: 11500000, guid: e0be119a5026afe4b973a94ed2f4f684, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BridgeRecipe
+  m_EditorClassIdentifier: Assembly-CSharp::GenericRecipe
   pieces:
   - prefab: {fileID: 5403058391150481618, guid: 371b1b6745fb72f4797ea1d858b7bc60, type: 3}
     localPosition: {x: -1.5, y: 0, z: 0}

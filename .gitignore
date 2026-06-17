@@ -41,6 +41,7 @@ UserSettings/
 *.meta~
 *.tmp
 *.bak
+Assets/Scripts/AI/APIKeys.cs
 
 # Gradle and package manager outputs
 .gradle/
