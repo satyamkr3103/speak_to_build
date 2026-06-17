@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class TestSpawn : MonoBehaviour
+public class CommandExecutorTest :
+    MonoBehaviour
 {
     private Keyboard keyboard;
 
@@ -11,22 +12,83 @@ public class TestSpawn : MonoBehaviour
             Keyboard.current;
     }
 
-    private void Update()
+    private async void Update()
     {
-        if (keyboard == null)
-            return;
-
-        if (keyboard.rKey.wasPressedThisFrame)
+        if (keyboard.jKey
+            .wasPressedThisFrame)
         {
-            VoiceRecorder.Instance
-                .StartRecording();
+            AICommand command =
+                await AICommandParser
+                .Instance
+                .Parse(
+                    "spawn dragon");
+            
+           
+            AICommandExecutor
+                .Instance
+                .Execute(
+                    command);
+            
         }
 
-        if (keyboard.tKey.wasPressedThisFrame)
+        if (keyboard.kKey
+            .wasPressedThisFrame)
         {
-            _ =
-                VoiceBuildManager.Instance
-                    .ProcessVoice();
+            AICommand command =
+                await AICommandParser
+                .Instance
+                .Parse(
+                    "delete dragon");
+
+            AICommandExecutor
+                .Instance
+                .Execute(
+                    command);
+        }
+
+        if (keyboard.lKey
+            .wasPressedThisFrame)
+        {
+            AICommand command =
+                await AICommandParser
+                .Instance
+                .Parse(
+                    "move dragon 5");
+
+            AICommandExecutor
+                .Instance
+                .Execute(
+                    command);
+        }
+
+        if (keyboard.mKey
+            .wasPressedThisFrame)
+        {
+            AICommand command =
+                await AICommandParser
+                .Instance
+                .Parse(
+                    "rotate dragon 90");
+
+            AICommandExecutor
+                .Instance
+                .Execute(
+                    command);
+        }
+
+        if (keyboard.nKey
+            .wasPressedThisFrame)
+        {
+            AICommand command =
+                await AICommandParser
+                .Instance
+                .Parse(
+                    "scale dragon 2");
+
+            AICommandExecutor
+                .Instance
+                .Execute(
+                    command);
         }
     }
 }

@@ -13,8 +13,8 @@ TagManager:
   - UI
   - Buildable
   - PlacementBlocker
-  - 
-  - 
+  - Placeable
+  - PreviewObject
   - 
   - 
   - 

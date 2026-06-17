@@ -3,7 +3,7 @@ using UnityEngine;
 public class ObjectLifetime : MonoBehaviour
 {
     public float lifeTime = 20f;
-
+    public bool isBeingPlaced;
     private float timer;
 
     private Renderer rend;
@@ -17,11 +17,14 @@ public class ObjectLifetime : MonoBehaviour
 
     private void Update()
     {
-        timer -= Time.deltaTime;
-
-        if(timer <= 5f)
+        if (!isBeingPlaced)
         {
-            if(rend != null)
+            timer -= Time.deltaTime;
+        }
+
+        if (timer <= 5f)
+        {
+            if (rend != null)
             {
                 float alpha =
                     Mathf.PingPong(Time.time * 5f, 1f);
@@ -35,8 +38,18 @@ public class ObjectLifetime : MonoBehaviour
             }
         }
 
-        if(timer <= 0)
+        if (timer <= 0)
         {
+            RuntimeObject runtime =
+    GetComponent<RuntimeObject>();
+
+            if (runtime != null)
+            {
+                WorldObjectManager
+                    .Instance
+                    .Remove(
+                        runtime.objectName);
+            }
             Destroy(gameObject);
         }
     }

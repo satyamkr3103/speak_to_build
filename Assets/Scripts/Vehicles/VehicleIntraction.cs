@@ -51,9 +51,9 @@ public class VehicleInteraction : MonoBehaviour
         if (renderer != null)
             renderer.enabled = false;
 
-        Camera.main
-            .GetComponent<IsometricCamera>()
-            .SetTarget(vehicle.transform);
+        // Camera.main
+        //     .GetComponent<IsometricCamera>()
+        //     .SetTarget(vehicle.transform);
     }
 
     void ExitVehicle()
@@ -72,9 +72,9 @@ public class VehicleInteraction : MonoBehaviour
 
         GetComponent<PlayerController3D>().enabled = true;
 
-        Camera.main
-            .GetComponent<IsometricCamera>()
-            .SetTarget(transform);
+        // Camera.main
+        //     .GetComponent<IsometricCamera>()
+        //     .SetTarget(transform);
 
         currentVehicle = null;
     }
