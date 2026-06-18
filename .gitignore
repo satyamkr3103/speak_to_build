@@ -5,7 +5,7 @@ Logs/
 Obj/
 Build/
 Builds/
-APIKeys.cs
+
 # Unity user-specific files
 UserSettings/
 .vs/
@@ -41,6 +41,7 @@ UserSettings/
 *.meta~
 *.tmp
 *.bak
+Assets/_Recovery
 Assets/Scripts/AI/Search/APIKeys.cs
 
 # Gradle and package manager outputs
