@@ -53,9 +53,89 @@ public class AICommandExecutor :
                     command.value);
 
                 break;
+            case "movenear":
+
+                MoveNear(
+                    command.targetObject,
+                    command.referenceObject,
+                    command.value);
+
+                break;
+            case "moveto":
+
+                MoveTo(
+                    command.targetObject,
+                    command.referenceObject);
+
+                break;
         }
     }
+    void MoveNear(
+    string target,
+    string reference,
+    float distance)
+    {
+        RuntimeObject targetObj =
+            WorldObjectManager
+            .Instance
+            .Find(target);
 
+        RuntimeObject referenceObj =
+            WorldObjectManager
+            .Instance
+            .Find(reference);
+
+        if (targetObj == null)
+        {
+            Debug.LogWarning(
+                "Target Not Found");
+
+            return;
+        }
+
+        if (referenceObj == null)
+        {
+            Debug.LogWarning(
+                "Reference Not Found");
+
+            return;
+        }
+
+        Vector3 offset =
+    Random.insideUnitSphere;
+
+        offset.y = 0;
+
+        offset =
+            offset.normalized *
+            distance;
+
+        targetObj.transform.position =
+            referenceObj.transform.position +
+            offset;
+    }
+
+    void MoveTo(
+    string target,
+    string reference)
+    {
+        RuntimeObject targetObj =
+            WorldObjectManager.Instance
+            .Find(target);
+
+        RuntimeObject referenceObj =
+            WorldObjectManager.Instance
+            .Find(reference);
+
+        if (targetObj == null ||
+           referenceObj == null)
+        {
+            return;
+        }
+
+        targetObj.transform.position =
+            referenceObj.transform.position;
+    }
     void ScaleObject(
     string objectName,
     float factor)

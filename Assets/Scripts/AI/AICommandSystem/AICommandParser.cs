@@ -70,6 +70,32 @@ make dragon twice as big
 ""value"":2
 }}
 
+move dragon near castle
+
+{{
+""action"":""MoveNear"",
+""targetObject"":""dragon"",
+""referenceObject"":""castle"",
+""value"":3
+}}
+
+put tiger beside dragon
+
+{{
+""action"":""MoveNear"",
+""targetObject"":""tiger"",
+""referenceObject"":""dragon"",
+""value"":3
+}}
+
+move dragon to castle
+
+{{
+  ""action"":""MoveTo"",
+  ""targetObject"":""dragon"",
+  ""referenceObject"":""castle""
+}}
+
 ";
         string result =
             await GroqManager
